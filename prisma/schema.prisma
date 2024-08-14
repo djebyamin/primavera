@@ -1,0 +1,105 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum UserRole {
+  CLIENT
+  ADMIN
+  PROFESSEUR
+}
+
+model Utilisateur {
+  id              Int              @id @default(autoincrement())
+  name           String
+  email           String           @unique
+  password      String
+  status          String
+  role            UserRole
+  inscriptions    Inscription[]
+  panier          Panier[]
+}
+
+model Panier {
+  coursesID      Int
+  utilisateurId Int
+  utilisateur   Utilisateur @relation(fields: [utilisateurId], references: [id])
+  course        Course @relation(fields: [coursesID], references: [id])
+  @@id([coursesID ,utilisateurId])
+}
+
+model Course {
+  id             Int              @id @default(autoincrement())
+  nom            String
+  description    String
+  prix           Float
+  panier         Panier[]
+  chapitres      Chapitres[]
+  inscriptions   Inscription[]
+  remises        Remise[]
+  categories     ClasseCategorie[]
+}
+
+model Chapitres {
+  id           Int         @id @default(autoincrement())
+  nom          String
+  courseId     Int
+  course       Course    @relation(fields: [courseId], references: [id])
+  lecons       Lecons[]
+}
+
+model Lecons {
+  id           Int         @id @default(autoincrement())
+  nom          String
+  url          String
+  chapitreId   Int
+  chapitre     Chapitres   @relation(fields: [chapitreId], references: [id])
+}
+
+model Categorie {
+  slug         String       @id
+  nom          String
+  courses      ClasseCategorie[]
+}
+
+model ClasseCategorie {
+  courseId     Int
+  categorieSlug String
+  course       Course   @relation(fields: [courseId], references: [id])
+  categorie    Categorie   @relation(fields: [categorieSlug], references: [slug])
+
+  @@id([courseId, categorieSlug])
+}
+
+model Inscription {
+  id             Int         @id @default(autoincrement())
+  utilisateurId  Int
+  courseId       Int
+  utilisateur    Utilisateur @relation(fields: [utilisateurId], references: [id])
+  course         Course    @relation(fields: [courseId], references: [id])
+}
+
+
+
+model Remise {
+  id            Int         @id @default(autoincrement())
+  nom           String
+  code          String
+  nv_prix       Float
+  date_exp      DateTime
+  ndv           String
+  courses       Course[]   
+}
+
+model Fichier {
+  id           Int         @id @default(autoincrement())
+  nom          String
+  type         String
+}
