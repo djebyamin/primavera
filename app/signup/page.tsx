@@ -1,12 +1,11 @@
 "use client";
 
+import { useRouter } from "next/navigation"; // Importer useRouter
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import {
   FaGoogle,
-  FaFacebook,
-  FaApple,
   FaSearch,
   FaBell,
   FaHeart,
@@ -16,7 +15,6 @@ import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
@@ -27,6 +25,7 @@ import { Input } from "@/components/ui/input";
 import * as Checkbox from "@radix-ui/react-checkbox";
 import { useState } from "react";
 import { newUser } from "../SignupAction";
+import { signInWithGoogle } from "@/app/auth/signInServerAction"; // Import Google sign-in action
 
 const formSchema = z
   .object({
@@ -53,6 +52,7 @@ const formSchema = z
   });
 
 export default function ProfileForm() {
+  const router = useRouter();
   const [searchQuery, setSearchQuery] = useState("");
 
   const form = useForm({
@@ -78,9 +78,21 @@ export default function ProfileForm() {
         role: "ADMIN",
       });
       toast.success("Your account has been created successfully.");
+      router.push("/"); // Rediriger vers la page d'accueil
     } catch (error) {
       console.log(error);
       toast.error("There was an error creating your account.");
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    try {
+      const user = await signInWithGoogle();
+      console.log(user); // Log the user to see if sign-in worked
+      router.push("/"); // Rediriger vers la page d'accueil
+    } catch (error) {
+      console.log(error);
+      toast.error("There was an error signing in with Google.");
     }
   };
 
@@ -224,7 +236,9 @@ export default function ProfileForm() {
                           id="terms"
                           className="w-4 h-4 flex items-center justify-center border border-gray-300 rounded"
                           checked={field.value}
-                          onCheckedChange={(checked) => field.onChange(checked)}
+                          onCheckedChange={(checked) =>
+                            field.onChange(checked === true)
+                          }
                         >
                           <Checkbox.Indicator className="w-4 h-4 flex items-center justify-center bg-blue-500 rounded">
                             <svg
@@ -266,6 +280,14 @@ export default function ProfileForm() {
                 </Button>
               </form>
             </Form>
+
+            <button
+              onClick={handleGoogleSignIn}
+              className="w-full flex items-center justify-center bg-blue-500 hover:bg-blue-600 text-white font-semibold rounded-lg py-2 mt-4"
+            >
+              <FaGoogle className="mr-2" />
+              Sign up with Google
+            </button>
           </div>
         </div>
       </div>

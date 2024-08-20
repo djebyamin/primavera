@@ -1,3 +1,5 @@
+'use client'
+import { useState } from "react";
 import Image from "next/image";
 import {
   FiCopy,
@@ -8,6 +10,8 @@ import {
 } from "react-icons/fi";
 
 export default function CoursePage() {
+  const [activeTab, setActiveTab] = useState("Overview");
+
   return (
     <div className="bg-white">
       {/* Header */}
@@ -67,6 +71,7 @@ export default function CoursePage() {
           />
         </div>
 
+        {/* Right Side */}
         <div className="max-w-md p-6 mx-auto bg-white rounded-lg shadow-md">
           {/* Price Section */}
           <div className="flex items-center justify-between">
@@ -128,134 +133,120 @@ export default function CoursePage() {
             </ul>
           </div>
 
+          {/* Social Share */}
           <div className="flex space-x-2 mt-4">
-            {/* Copy Link Button */}
             <button className="flex items-center px-4 py-2 space-x-2 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200">
               <FiCopy className="w-5 h-5" />
               <span>Copier le lien</span>
             </button>
 
-            {/* Facebook Button */}
             <button className="flex items-center justify-center w-10 h-10 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200">
               <FiFacebook className="w-5 h-5" />
             </button>
 
-            {/* Twitter Button */}
             <button className="flex items-center justify-center w-10 h-10 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200">
               <FiTwitter className="w-5 h-5" />
             </button>
 
-            {/* Email Button */}
             <button className="flex items-center justify-center w-10 h-10 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200">
               <FiMail className="w-5 h-5" />
             </button>
 
-            {/* WhatsApp Button */}
             <button className="flex items-center justify-center w-10 h-10 text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200">
               <FiMessageSquare className="w-5 h-5" />
             </button>
           </div>
         </div>
       </div>
-      <div className="bg-white py-8">
-        {/* Section: Cours Populaires */}
-        <div className="container mx-auto">
-          <h2 className="text-3xl font-bold mb-6">Cours Populaires</h2>
-          <div className="flex justify-between">
-            {/* Carte de Cours Populaires */}
-            {Array(4)
-              .fill("")
-              .map((_, idx) => (
-                <div
-                  key={idx}
-                  className="bg-white border rounded-lg shadow-md max-w-xs"
-                >
-                  <Image
-                    src="/path-to-your-course-image.jpg"
-                    alt="Cours Populaire"
-                    width={400}
-                    height={250}
-                    className="rounded-t-lg"
-                  />
-                  <div className="p-4">
-                    <div className="flex justify-between items-center mb-2">
-                      <span className="bg-green-100 text-green-600 text-xs font-semibold px-2 py-1 rounded">
-                        Débutant
-                      </span>
-                      <span className="bg-yellow-100 text-yellow-600 text-xs font-semibold px-2 py-1 rounded">
-                        Bestseller
-                      </span>
-                    </div>
-                    <h3 className="text-lg font-semibold mb-2">
-                      Gestion d’un projet aéronautique avec Primavera P6
-                    </h3>
-                    <div className="text-red-500 text-lg font-bold">$57</div>
-                    <div className="flex items-center mt-2">
-                      <span className="text-yellow-500 mr-1">★</span>
-                      <span className="text-gray-600 text-sm">5.0</span>
-                      <span className="text-gray-600 text-sm ml-2">
-                        265.7K students
-                      </span>
-                    </div>
-                  </div>
-                </div>
-              ))}
-          </div>
+
+      {/* Course Overview */}
+      <div className="course-overview mt-12 p-8 bg-gray-50">
+        {/* Tabs */}
+        <div className="tabs flex space-x-4 mb-8">
+          <button
+            className={`tab py-2 px-4 ${
+              activeTab === "Overview"
+                ? "border-b-2 border-red-600"
+                : "text-gray-600"
+            }`}
+            onClick={() => setActiveTab("Overview")}
+          >
+            Overview
+          </button>
+          <button
+            className={`tab py-2 px-4 ${
+              activeTab === "Curriculum"
+                ? "border-b-2 border-red-600"
+                : "text-gray-600"
+            }`}
+            onClick={() => setActiveTab("Curriculum")}
+          >
+            Curriculum
+          </button>
+          <button
+            className={`tab py-2 px-4 ${
+              activeTab === "Instructor"
+                ? "border-b-2 border-red-600"
+                : "text-gray-600"
+            }`}
+            onClick={() => setActiveTab("Instructor")}
+          >
+            Instructor
+          </button>
+          <button
+            className={`tab py-2 px-4 ${
+              activeTab === "Reviews"
+                ? "border-b-2 border-red-600"
+                : "text-gray-600"
+            }`}
+            onClick={() => setActiveTab("Reviews")}
+          >
+            Reviews
+          </button>
         </div>
 
-        {/* Main Content */}
-        <div className="container mx-auto mt-8">
-          {/* Section: Formation Direct */}
-          <div className="bg-[#ff2d52] text-white p-8 flex justify-center">
-            <div className="w-[80%] flex">
-              <div className="w-1/2 pr-8">
-                <div className="bg-gray-100 text-red-600 text-xs font-bold px-2 py-1 inline-block mb-4">
-                  FORMATION DIRECT
-                </div>
-                <h2 className="text-4xl font-bold mb-4">
-                  Réservez une place
-                  <br />
-                  Dans les cours direct (live)
-                </h2>
-                <p className="text-gray-200 mb-6">
-                  Trouvez la date qui correspond à votre emploi du temps pour
-                  assister à un cours professionnel sur le logiciel Primavera
-                  P6.
-                </p>
-                <div className="flex items-center mb-4">
-                  {["LU", "MA", "ME", "JE", "VE", "SA", "DI"].map((day) => (
-                    <button
-                      key={day}
-                      className={`py-2 px-4 rounded-lg mr-2 ${
-                        day === "MA"
-                          ? "bg-red-500 text-white"
-                          : "bg-white text-red-600"
-                      }`}
-                    >
-                      {day}
-                    </button>
-                  ))}
-                </div>
-                <div className="flex items-center space-x-4">
-                  <button className="bg-white text-red-600 py-2 px-4 rounded-lg">
-                    18:00
-                  </button>
-                  <button className="bg-white text-red-600 py-2 px-4 rounded-lg">
-                    19:45
-                  </button>
-                </div>
-              </div>
-              <div className="w-1/2">
-                <Image
-                  src="/path-to-your-direct-course-image.jpg"
-                  alt="Formation Direct"
-                  width={600}
-                  height={400}
-                  className="rounded-lg"
-                />
-              </div>
+        {/* Tab Content */}
+        <div className="tab-content">
+          {activeTab === "Overview" && (
+            <div className="overview mb-8">
+              <h2 className="text-xl font-bold mb-4">Overview</h2>
+              <p className="text-gray-600">
+                Cette formation vous apprendra des techniques avancées pour
+                optimiser la planification, l’exécution et le contrôle de vos
+                projets. Vous apprendrez à…
+              </p>
             </div>
-          </div>
+          )}
+
+          {activeTab === "Curriculum" && (
+            <div className="curriculum mb-8">
+              <h2 className="text-xl font-bold mb-4">Curriculum</h2>
+              <p className="text-gray-600">
+                Voici le programme détaillé du cours. Chaque module contient des
+                vidéos, des exercices et des quiz pour vous aider à maîtriser
+                les concepts.
+              </p>
+            </div>
+          )}
+
+          {activeTab === "Instructor" && (
+            <div className="about-instructor mb-8">
+              <h2 className="text-xl font-bold mb-4">About the Instructor</h2>
+              <p className="text-gray-600">
+                Instructor Name est un professionnel expérimenté avec des années
+                d'expérience dans XYZ…
+              </p>
+            </div>
+          )}
+
+          {activeTab === "Reviews" && (
+            <div className="reviews mb-8">
+              <h2 className="text-xl font-bold mb-4">Student Reviews</h2>
+              <p className="text-gray-600">
+                Découvrez ce que les autres étudiants pensent de ce cours.
+              </p>
+            </div>
+          )}
         </div>
       </div>
     </div>
