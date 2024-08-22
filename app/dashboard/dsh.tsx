@@ -14,7 +14,7 @@ import { auth } from '../auth'
 
 const steps = ['Basic Information', 'Advance Information', 'Curriculum', 'Publish Course']
 
-export  default async function CreateCourse() {
+export  default  function CreateCourse() {
   
   const [currentStep, setCurrentStep] = useState(0)
 
