@@ -212,6 +212,64 @@ export default function Dashboard() {
             </div>
           )}
 
+          {activeTab === "Teachers" && (
+            <div>
+              <h2 className="text-2xl font-bold mb-4">Teachers (20)</h2>
+              
+              <div className="mb-4 flex justify-between items-center">
+                <div className="bg-white rounded-lg flex items-center p-2 w-1/3">
+                  <span className="text-gray-400 mr-2">🔍</span>
+                  <input
+                    type="text"
+                    placeholder="Project management"
+                    className="w-full outline-none"
+                  />
+                </div>
+                <select className="border p-2 rounded-lg">
+                  <option>Sort by</option>
+                  {/* Add more options as needed */}
+                </select>
+              </div>
+
+              <div className="grid grid-cols-4 gap-4">
+                {[...Array(12)].map((_, index) => (
+                  <div key={index} className="bg-white rounded-lg shadow overflow-hidden">
+                    <Image
+                      src="/teacher-image.jpg"
+                      alt="Nicole Warren"
+                      width={300}
+                      height={300}
+                      className="w-full"
+                    />
+                    <div className="p-4">
+                      <h3 className="font-bold mb-2">Nicole Warren</h3>
+                      <div className="flex items-center mb-2">
+                        <span className="text-yellow-400 mr-1">★</span>
+                        <span className="font-bold">4.7</span>
+                        <span className="text-gray-500 ml-1">(1,532)</span>
+                      </div>
+                      <p className="text-gray-500 mb-2">UX/UI Designer</p>
+                      <button className="bg-red-500 text-white px-4 py-2 rounded-lg w-full">
+                        View Profile
+                      </button>
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Pagination */}
+              <div className="flex justify-center mt-8">
+                <button className="px-3 py-2 mx-1 bg-gray-200 rounded-full">←</button>
+                <button className="px-3 py-2 mx-1 bg-red-500 text-white rounded-full">1</button>
+                <button className="px-3 py-2 mx-1 bg-gray-200 rounded-full">2</button>
+                <button className="px-3 py-2 mx-1 bg-gray-200 rounded-full">3</button>
+                <button className="px-3 py-2 mx-1 bg-gray-200 rounded-full">4</button>
+                <button className="px-3 py-2 mx-1 bg-gray-200 rounded-full">5</button>
+                <button className="px-3 py-2 mx-1 bg-gray-200 rounded-full">→</button>
+              </div>
+            </div>
+          )}
+
           {activeTab === "Whishlist" && (
             <div>
               {/* Wishlist section */}
@@ -321,7 +379,6 @@ export default function Dashboard() {
               </div>
             </div>
           )}
-          {activeTab === "Teachers" && <div>Teachers content</div>}
           {activeTab === "Message" && <div>Message content</div>}
           {activeTab === "Purchase History" && (
             <div>Purchase History content</div>
