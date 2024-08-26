@@ -3,16 +3,15 @@
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
-
 import { Button } from "@/components/ui/button";
 import {
   Form,
   FormControl,
-  FormDescription,
   FormField,
   FormItem,
   FormLabel,
   FormMessage,
+  FormDescription,
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Textarea } from "@/components/ui/textarea";
@@ -35,24 +34,28 @@ export default function Curriculum() {
   const [selectedVideo, setSelectedVideo] = useState<File | null>(null);
   const [selectedSubtitles, setSelectedSubtitles] = useState<File[]>([]);
 
-  // Utilisation du resolver Zod
+  // Utilisation du resolver Zod avec defaultValues
   const form = useForm<z.infer<typeof formSchema>>({
     resolver: zodResolver(formSchema),
-  });
-  const [curriculum, setcurriculum] = useState({
-    title: "",
-    message: "",
-    notes: "",
-    video: "",
-    subtitle: "",
+    defaultValues: {
+      title: "Titre par défaut",
+      description: "Description par défaut",
+      notes: "",
+    },
   });
 
   // Collecter les données du formulaire
   const onSubmit = (values: z.infer<typeof formSchema>) => {
-    // Collecter les données dans l'objet `curriculum`
-    
+    // Créer l'objet curriculumobj avec les valeurs du formulaire et des fichiers sélectionnés
+    const curriculumobj = {
+      title: values.title,
+      description: values.description,
+      notes: values.notes || "",
+      video: selectedVideo ? selectedVideo.name : "", // Utilise le nom de la vidéo sélectionnée
+      subtitle: selectedSubtitles.map((file) => file.name), // Utilise les noms des fichiers de sous-titres sélectionnés
+    };
 
-    console.log("Curriculum Data:", curriculum);
+    console.log("Curriculum Data:", curriculumobj);
   };
 
   const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {

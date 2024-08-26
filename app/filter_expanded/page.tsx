@@ -158,6 +158,60 @@ export default function Dashboard() {
 
         {/* Content based on active tab */}
         <div className="mt-4">
+          {activeTab === "Dashboard" && (
+            <div>
+              <h2 className="text-2xl font-bold mb-4">Dashboard</h2>
+              
+              {/* Statistics */}
+              <div className="grid grid-cols-4 gap-4 mb-8">
+                <div className="bg-orange-400 text-white p-4 rounded-lg">
+                  <h3 className="text-2xl font-bold">957</h3>
+                  <p>Enrolled Courses</p>
+                </div>
+                <div className="bg-purple-500 text-white p-4 rounded-lg">
+                  <h3 className="text-2xl font-bold">8</h3>
+                  <p>Active Courses</p>
+                </div>
+                <div className="bg-green-400 text-white p-4 rounded-lg">
+                  <h3 className="text-2xl font-bold">901</h3>
+                  <p>Completed Courses</p>
+                </div>
+                <div className="bg-red-400 text-white p-4 rounded-lg">
+                  <h3 className="text-2xl font-bold">241</h3>
+                  <p>Total Certificates</p>
+                </div>
+              </div>
+
+              {/* Learning section */}
+              <div>
+                <h3 className="text-xl font-bold mb-4">Let's start learning, Kevin</h3>
+                <div className="grid grid-cols-4 gap-4">
+                  {[1, 2, 3, 4].map((item) => (
+                    <div key={item} className="bg-white rounded-lg shadow overflow-hidden">
+                      <Image
+                        src={`/course-${item}.jpg`}
+                        alt={`Course ${item}`}
+                        width={300}
+                        height={200}
+                        className="w-full"
+                      />
+                      <div className="p-4">
+                        <h4 className="font-bold mb-2">Course Title {item}</h4>
+                        <p className="text-gray-500 mb-2">1 Lesson done</p>
+                        <div className="flex justify-between items-center">
+                          <button className="bg-red-500 text-white px-4 py-2 rounded-lg">
+                            {item === 4 ? 'Continue' : 'Start Course'}
+                          </button>
+                          {item === 4 && <span className="text-green-500">67% Completed</span>}
+                        </div>
+                      </div>
+                    </div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          )}
+
           {activeTab === "Whishlist" && (
             <div>
               {/* Wishlist section */}
@@ -238,8 +292,6 @@ export default function Dashboard() {
             </div>
           )}
 
-          {/* Other tabs */}
-          {activeTab === "Dashboard" && <div>Contenu du Dashboard</div>}
           {activeTab === "Courses" && (
             <div>
               {/* List of courses */}
