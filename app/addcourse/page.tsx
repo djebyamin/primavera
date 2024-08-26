@@ -15,11 +15,20 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { useRouter } from "next/navigation";
+import { createCourse } from "../addcourseAction";
 
 const formSchema = z.object({
   nom: z.string().min(2, { message: "Name must be at least 2 characters." }),
-  description: z.string().min(10, { message: "Description must be at least 10 characters." }),
-  prix: z.number().min(0, { message: "Price must be a positive number." }),
+  description: z
+    .string()
+    .min(10, { message: "Description must be at least 10 characters." }),
+  prix: z
+    .string()
+    .min(1, { message: "Price must be a positive number." })
+    .transform((val) => Number(val))
+    .refine((val) => !isNaN(val) && val > 0, {
+      message: "Price must be a positive number.",
+    }),
 });
 
 type FormValues = z.infer<typeof formSchema>;
@@ -36,17 +45,12 @@ export default function CourseCreationForm() {
     },
   });
 
-  const onSubmit = async (data: FormValues) => {
+  const onSubmit = async (values: FormValues) => {
     try {
-      // Replace with your server-side logic to handle form submission
-      await fetch('/api/courses', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify(data),
-      });
-      router.push('/courses'); // Redirect after successful submission
+      await createCourse(values);
+      console.log("Course created successfully!");
+      
+      alert("course added");
     } catch (error) {
       console.error("Error creating course:", error);
     }
@@ -64,9 +68,7 @@ export default function CourseCreationForm() {
               <FormControl>
                 <Input placeholder="Course Name" {...field} />
               </FormControl>
-              <FormDescription>
-                Enter the name of the course.
-              </FormDescription>
+              <FormDescription>Enter the name of the course.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
@@ -98,9 +100,7 @@ export default function CourseCreationForm() {
               <FormControl>
                 <Input type="number" placeholder="Course Price" {...field} />
               </FormControl>
-              <FormDescription>
-                Enter the price of the course.
-              </FormDescription>
+              <FormDescription>Enter the price of the course.</FormDescription>
               <FormMessage />
             </FormItem>
           )}
