@@ -9,12 +9,16 @@ export default async function SigninPage() {
     redirect("/signin");
   }
 
-  return <Dsh formData={{
-    title: "",
-    subtitle: "",
-    category: "",
-    topic: "",
-    language: "",
-    duration: ""
-  }} />;
+  return (
+    <Dsh
+      formData={{
+        title: "",
+        subtitle: "",
+        category: "",
+        topic: "",
+        language: "",
+        duration: "",
+      }}
+    />
+  );
 }

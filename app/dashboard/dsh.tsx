@@ -12,7 +12,6 @@ import PublishCourse from "@/app/dashboard/PublishCourse";
 import basicObj from "@/app/dashboard/BasicInformation";
 import advobj from "@/app/dashboard/AdvanceInformation";
 
-
 const steps = [
   "Basic Information",
   "Advance Information",
@@ -30,18 +29,16 @@ type NextComponentProps = {
   };
 };
 
-export default function CreateCourse({ formData }: NextComponentProps)  {
-
-
+export default function CreateCourse({ formData }: NextComponentProps) {
   <div>
-  <h2>Course Information</h2>
-  <p>Title: {formData.title}</p>
-  <p>Subtitle: {formData.subtitle}</p>
-  <p>Category: {formData.category}</p>
-  <p>Topic: {formData.topic}</p>
-  <p>Language: {formData.language}</p>
-  <p>Duration: {formData.duration}</p>
-</div>
+    <h2>Course Information</h2>
+    <p>Title: {formData.title}</p>
+    <p>Subtitle: {formData.subtitle}</p>
+    <p>Category: {formData.category}</p>
+    <p>Topic: {formData.topic}</p>
+    <p>Language: {formData.language}</p>
+    <p>Duration: {formData.duration}</p>
+  </div>;
   const [currentStep, setCurrentStep] = useState(0);
 
   const handleNext = () => {
@@ -55,8 +52,6 @@ export default function CreateCourse({ formData }: NextComponentProps)  {
       setCurrentStep(currentStep - 1);
     }
   };
-
-
 
   return (
     <div className="flex h-screen bg-gray-100">
