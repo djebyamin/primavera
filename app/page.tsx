@@ -3,6 +3,8 @@ import Head from 'next/head';
 import Image from 'next/image';
 import { Search, Bell, ShoppingCart } from 'lucide-react';
 import Ensuite from"@/app/ensuite/page"
+import Suite from"@/app/x/suite"
+import Pay from"@/app/x/paiment"
 
 
 const HomePage = () => {
@@ -127,6 +129,8 @@ const HomePage = () => {
           </div>
         </section>
         <Ensuite/>
+        <Suite/>
+        <Pay/>
       </main>
 
       <footer className="bg-gray-800 text-white py-8">
