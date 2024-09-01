@@ -5,6 +5,8 @@ import { Search, Bell, ShoppingCart } from 'lucide-react';
 import Ensuite from"@/app/ensuite/page"
 import Suite from"@/app/x/suite"
 import Pay from"@/app/x/paiment"
+import Contact from"@/app/x/contactus"
+import Footer from"@/app/x/footer"
 
 
 const HomePage = () => {
@@ -107,7 +109,7 @@ const HomePage = () => {
                 className="bg-white rounded-lg shadow-lg hover:shadow-xl transform hover:scale-105 transition-transform duration-300 overflow-hidden"
               >
                 <Image
-                  src={`/course-image-${index + 1}.jpg`}
+                  src={`/pg.png`}
                   alt="Course"
                   width={300}
                   height={200}
@@ -131,10 +133,11 @@ const HomePage = () => {
         <Ensuite/>
         <Suite/>
         <Pay/>
+        <Contact/>
       </main>
 
-      <footer className="bg-gray-800 text-white py-8">
-        {/* Add footer content */}
+      <footer >
+       <Footer/>
       </footer>
     </div>
   );

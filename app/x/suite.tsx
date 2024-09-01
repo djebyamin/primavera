@@ -15,9 +15,9 @@ const InstructorLandingPage = () => {
               <button className="bg-white text-pink-500 font-bold py-2 px-4 rounded">
                 Start teaching
               </button>
-              <div className="mt-4">
+              <div className="mt-8">
                 <Image
-                  src="/placeholder-instructor.jpg"
+                  src="/formateur.png"
                   alt="Instructor"
                   width={150}
                   height={150}
