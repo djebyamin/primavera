@@ -1,4 +1,4 @@
-"use client"
+"use client";
 
 import React from 'react';
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -165,7 +165,6 @@ export default function PersonalizedCourseForm() {
                           placeholder="Pick a date"
                           value={date ? format(date, "PPP") : ""}
                           readOnly
-                          {...field}
                         />
                       </FormControl>
                     </PopoverTrigger>

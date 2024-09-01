@@ -45,9 +45,7 @@ const HomePage = () => {
             <button className="bg-red-500 text-white px-4 py-2 rounded-full text-sm font-medium hover:bg-red-600 transition-colors duration-300">Commencez</button>
           </div>
         </nav>
-        <div className="container mx-auto px-4 py-2 flex items-center justify-between">
-          <Image src="/formation-primavera-logo.png" alt="Formation primavera" width={150} height={32} />
-        </div>
+     
       </header>
 
       <main className="container mx-auto px-4 py-8">
@@ -73,21 +71,28 @@ const HomePage = () => {
           </div>
           <div className="w-full max-w-4xl mx-auto p-6">
             <div className="flex space-x-6">
-              <div className="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between flex-1">
-                <h3 className="text-2xl font-bold mb-3">Vidéos</h3>
-                <p className="text-gray-700 mb-4">
-                  Accédez à une bibliothèque complète de vidéos
-                </p>
-                <ul className="list-disc list-inside text-gray-600 text-sm mb-4">
-                  <li>Apprenez quand et où cela vous convient</li>
-                  <li>Modules courts et ciblés</li>
-                  <li>Revoit les notions à votre guise</li>
-                </ul>
-                <button className="mt-4 text-blue-500 hover:text-blue-700 flex items-center">
-                  Parcourir les formations
-                  <span className="ml-2 text-lg">→</span>
-                </button>
-              </div>
+            <div
+  className="bg-white p-6 rounded-lg shadow-md flex flex-col justify-between flex-1 relative overflow-hidden"
+  style={{ backgroundImage: 'url(/girl.jpg)', backgroundSize: 'cover', backgroundPosition: 'center' }}
+>
+  <div className="absolute inset-0 bg-black opacity-30"></div> {/* Optional overlay for text readability */}
+  <div className="relative z-10">
+    <h3 className="text-2xl font-bold mb-3">Vidéos</h3>
+    <p className="text-gray-700 mb-4">
+      Accédez à une bibliothèque complète de vidéos
+    </p>
+    <ul className="list-disc list-inside text-gray-600 text-sm mb-4">
+      <li>Apprenez quand et où cela vous convient</li>
+      <li>Modules courts et ciblés</li>
+      <li>Revoit les notions à votre guise</li>
+    </ul>
+    <button className="mt-4 text-blue-500 hover:text-blue-700 flex items-center">
+      Parcourir les formations
+      <span className="ml-2 text-lg">→</span>
+    </button>
+  </div>
+</div>
+
 
               <div className="bg-gray-200 p-6 rounded-lg shadow-md flex flex-col justify-between flex-1">
                 <h3 className="text-lg font-semibold text-gray-800">Formation Personnalisée</h3>

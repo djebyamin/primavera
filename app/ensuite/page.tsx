@@ -7,14 +7,23 @@ async function getCourses() {
   return await prisma.course.findMany();
 }
 
+async function getCourseCount() {
+  const courses = await prisma.course.count();
+  return courses;
+}
+
 const CourseTable: React.FC = async () => {
   const courses = await getCourses();
+  const courseCount = await getCourseCount();
 
   return (
     <section className="py-12 px-4 max-w-7xl mx-auto">
       <div className="flex justify-between items-start mb-8">
-      <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8">Nos cours live</h2>
-        
+        <h2 className="text-3xl font-extrabold text-center text-gray-800 mb-8">Nos cours live</h2>
+        {/* Display the number of courses */}
+        <p className="text-lg text-gray-600 mb-4">
+          <strong>Total Courses:</strong> {courseCount}
+        </p>
       </div>
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
         {courses.map((course) => (
